@@ -939,21 +939,28 @@
 
   <script>
 function validate() {
-    var name = document.getElementById("name").value;
-    var phone = document.getElementById("number").value;
-    var email = document.getElementById("email").value;
-    var subject = document.getElementById("subject").value;
-    var message = document.getElementById("message").value;
+    var name = document.getElementById("name").value.trim();
+    var phone = document.getElementById("number").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var subject = document.getElementById("subject").value.trim();
+    var message = document.getElementById("message").value.trim();
 
     var phoneRegex = /^(?!0|1)\d{10}$/;
     var emailRegex = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+\.([a-z]+)(\.[a-z]+)?$/;
 
-    if (name.trim() === "") {
+    
+    if (name === "" && phone === "" && email === "" && subject === "" && message === "") {
+        alert("Please fill out at least one contact detail");
+        return false;
+    }
+
+    // Check individual fields
+    if (name === "") {
         alert("Please enter your name");
         return false;
     }
 
-    if (phone.trim() === "") {
+    if (phone === "") {
         alert("Please enter your phone number");
         return false;
     } else if (!phoneRegex.test(phone)) {
@@ -961,7 +968,7 @@ function validate() {
         return false;
     }
 
-    if (email.trim() === "") {
+    if (email === "") {
         alert("Please enter your email");
         return false;
     } else if (!emailRegex.test(email)) {
@@ -969,12 +976,12 @@ function validate() {
         return false;
     }
 
-    if (subject.trim() === "") {
+    if (subject === "") {
         alert("Please enter the subject");
         return false;
     }
 
-    if (message.trim() === "") {
+    if (message === "") {
         alert("Please enter your message");
         return false;
     }
